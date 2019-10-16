@@ -6,8 +6,8 @@ import { map } from 'rxjs/operators';
 })
 export class AdminService {
 
-  url = 'http://localhost:3000';
-  // url = 'https://goutham-till-pos-api.herokuapp.com';
+  // url = 'http://localhost:3000';
+  url = 'https://goutham-till-pos-api.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
