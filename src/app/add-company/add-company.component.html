@@ -1,0 +1,19 @@
+<div class="container">
+
+    <div class="row">
+
+      <div class="col-8">
+        <label for="companyName">Item name</label>
+        <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Enter Item Name" [(ngModel)]="companyName" required>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+
+      <div class="col-8 py-2">
+        <button class="btn btn-primary btn-block" (click)="addCompany()">Add Company</button>
+      </div>
+
+    </div>
+
+  </div>

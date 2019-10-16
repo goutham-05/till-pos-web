@@ -1,0 +1,175 @@
+<header class="mb-5">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-5">
+    <a class="navbar-brand" href="#">Till POS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/main-dashboard']" routerLinkActive="router-link-active" >Admin <span class="sr-only">(current)</span></a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+
+<div class="container">
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Welcome Human!</h1>
+      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+      <p>
+        <a href="#" class="btn btn-primary my-2">Main call to action</a>
+        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </p>
+    </div>
+  </section>
+</main>
+</div>
+
+<div class="container-fluid">
+  <div class="album py-5 bg-light">
+
+        <div class="row">
+
+          <div class="col-8">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Name</th>
+                  <th scope="col" class="text-center">Description</th>
+                  <th scope="col" class="text-center">Retail Price</th>
+                  <th scope="col" class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemsData; let i = index">
+                  <td class="text-center"> {{item.name}} </td>
+                  <td class="text-center"> {{item.description}} </td>
+                  <td class="text-center"> {{item.price}} </td>
+
+                  <td class="text-center">
+                    <button type="button" class="btn btn-danger" (click)="removeItem(item)">Remove</button>
+                    <!-- <span class="px-3"> {{count}} </span> -->
+                    <span class="px-2"></span>
+                    <button type="button" class="btn btn-success" (click)="addItem(item, i)">Add</button>
+
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-4">
+                  <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Cart summary </div>
+                  <div class="p-4">
+<!--
+                      <ul class="list-unstyled mb-4" *ngFor="let item of itemList; let i = index">
+                          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">{{item.name}} x 0</strong><strong>$ {{itemQty}} Total</strong></li>
+
+                      </ul> -->
+
+                      <ul class="list-unstyled mb-4">
+                          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                            <h5 class="font-weight-bold">${{totalBillAmout | number:'3.1-5'}}</h5>
+                          </li>
+                      </ul>
+
+                    <!-- <ul class="list-unstyled mb-4">
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Large Pizza x {{largePizzaCount}}</strong><strong>${{largePizzaTotal | number:'3.1-5'}}</strong></li>
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Medium Pizza x {{mediumPizzaCount}}</strong><strong>${{mediumPizzaTotal | number:'3.1-5'}}</strong></li>
+                        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Small Pizza x {{smallPizzaCount}} </strong><strong>${{smallPizzaTotal | number:'3.1-5'}}</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                        <h5 class="font-weight-bold">${{totalBillAmout | number:'3.1-5'}}</h5>
+                      </li>
+                    </ul> -->
+
+                    <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+
+                  </div>
+          </div>
+
+
+
+        </div>
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+   <div class="col-12">
+            <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label for="companies">Employee from Company:</label>
+                        <select class="form-control" name="companyType" id="companyType" (change)="selectCompany($event.target.value)">
+                            <option value="" disabled>Select Option</option>
+                            <option *ngFor="let data of companiesData" value="{{data._id}}">{{data.name}}</option>
+                        </select>
+                      </div>
+
+                      <div class="bg-light px-4 py-3 text-uppercase font-weight-bold" *ngIf="companyPricing">
+                        <h6>Avalibale Offer</h6>
+                        <div *ngFor="let data of companyPricing">
+                          <p *ngIf="data.offered_deal > 0">Gets a {{data.offered_deal}} for {{data.min_buy}} deal on {{data.item.name}}</p>
+                          <p *ngIf="data.discount > 0">Gets a discount on {{data.item.name}} where the price drops to {{data.discount}} per pizza</p>
+                        </div>
+
+                      </div>
+
+                      <hr>
+
+                  <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+                  <div class="p-4">
+                    <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                      <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+                      <div class="input-group-append border-0">
+                        <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-lg-6">
+                  <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                  <div class="p-4">
+                    <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                    <ul class="list-unstyled mb-4">
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+                      <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                        <h5 class="font-weight-bold">$400.00</h5>
+                      </li>
+                    </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+</div>

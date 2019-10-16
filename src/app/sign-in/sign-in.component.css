@@ -1,0 +1,12 @@
+.signup {
+    min-height: 100vh;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .example-container > * {
+    width: 100%;
+  }

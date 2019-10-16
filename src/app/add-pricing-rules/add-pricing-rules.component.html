@@ -1,0 +1,53 @@
+<div class="container">
+
+    <div class="row">
+
+      <div class="col-8">
+          <label for="company">Select Company</label>
+          <select class="form-control" name="companyType" id="companyType" (change)="selectCompany($event.target.value)">
+              <option value="" disabled>Select Option</option>
+              <option *ngFor="let data of companyData" value="{{data._id}}">{{data.name}}</option>
+          </select>
+
+      </div>
+
+      <div class="col-8">
+          <label for="item">Select item</label>
+          <select class="form-control" name="companyType" id="companyType" (change)="selectItem($event.target.value)">
+              <option value="" disabled>Select Option</option>
+              <option *ngFor="let data of itemsData" value="{{data._id}}">{{data.name}}</option>
+          </select>
+
+      </div>
+
+      <div class="col-8">
+        <label for="minBuy">Min Buy</label>
+        <input type="text" class="form-control" id="minBuy" name="minBuy" placeholder="Enter item name" [(ngModel)]="minBuy" required>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+
+      <div class="col-8">
+        <label for="offeredDeal">Offered Deal</label>
+        <input type="text" class="form-control" id="offeredDeal" placeholder="Enter offered deal" [(ngModel)]="offeredDeal" required>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+
+      <div class="col-8">
+        <label for="discount">Discount</label>
+        <input type="text" class="form-control" id="discount" placeholder="Enter discount" [(ngModel)]="discount" required>
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+
+      <div class="col-8 py-3">
+        <button class="btn btn-primary btn-block" (click)="addPricing()">Set Pricing</button>
+      </div>
+
+    </div>
+
+  </div>

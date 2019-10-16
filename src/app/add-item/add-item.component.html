@@ -1,0 +1,35 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-8">
+      <label for="itemName">Item name</label>
+      <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter Item Name" [(ngModel)]="itemName" required>
+      <div class="invalid-feedback">
+        Valid first name is required.
+      </div>
+    </div>
+
+    <div class="col-8">
+      <label for="itemDescription">Item Description</label>
+      <input type="text" class="form-control" id="itemDescription" placeholder="Enter Item Description" [(ngModel)]="itemDescription" required>
+      <div class="invalid-feedback">
+        Valid first name is required.
+      </div>
+    </div>
+
+    <div class="col-8">
+      <label for="itemPrice">Item Price</label>
+      <input type="text" class="form-control" id="itemPrice" placeholder="Enter Item Price" [(ngModel)]="itemPrice" required>
+      <div class="invalid-feedback">
+        Valid first name is required.
+      </div>
+    </div>
+
+    <div class="col-8 py-3">
+      <button class="btn btn-primary btn-block" (click)="addItem()">Add Item</button>
+    </div>
+
+  </div>
+
+</div>
