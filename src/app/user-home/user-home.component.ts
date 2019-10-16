@@ -39,6 +39,8 @@ export class UserHomeComponent implements OnInit {
   ngOnInit() {
     this.getItems();
     this.getActiveCompanies();
+    this.itemList = JSON.parse(this.adminService.getCartsItems());
+
   }
 
   getActiveCompanies() {
@@ -88,30 +90,30 @@ export class UserHomeComponent implements OnInit {
   addItem(item, index) {
 
 
-    // this.itemList = JSON.parse(this.adminService.getCartsItems());
+    this.itemList = JSON.parse(this.adminService.getCartsItems());
 
-    // if (this.cartItems.length > 0) {
+    if (this.itemList && this.itemList.length > 0) {
 
-    //   // tslint:disable-next-line: prefer-for-of
-    //   for (let i = 0; i < this.cartItems.length; i++) {
+      if (this.cartItems[index]) {
 
-    //     if (this.cartItems[index]) {
-    //       if (this.cartItems[i].name === item.name) {
+        if (this.itemList[index].name === item.name) {
+          this.cartItems[index].itemQty++;
+        }
+      } else {
+        item.itemQty = 1;
+        this.cartItems.push(item);
+      }
 
-    //         this.itemList[index].itemQty ++;
+    } else {
 
-    //       }
-    //     } else {
-    //       this.cartItems.push(item);
-    //     }
-    //   }
+      item.itemQty = 1;
+      this.cartItems.push(item);
+    }
 
-    // } else {
-    //   item.itemQty = this.itemQty;
-    //   this.cartItems.push(item);
-    // }
-    // this.adminService.setCartItems(this.cartItems);
-    // this.itemList = JSON.parse(this.adminService.getCartsItems());
+    this.adminService.setCartItems(this.cartItems);
+    this.itemList = JSON.parse(this.adminService.getCartsItems());
+
+    console.log('items list', this.itemList);
 
 
     if (this.biilAmount >= 0) {
@@ -124,15 +126,41 @@ export class UserHomeComponent implements OnInit {
 
   }
 
-  removeItem(item) {
+  removeItem(item, index) {
+
+    this.itemList = JSON.parse(this.adminService.getCartsItems());
+
+    if (this.itemList && this.itemList.length > 0) {
+
+      if (this.cartItems[index]) {
+
+        if (this.itemList[index].name === item.name) {
+          if (this.itemList[index].itemQty > 0) {
+            this.cartItems[index].itemQty--;
+          }
+        }
+      } else {
+        item.itemQty = 1;
+        this.cartItems.push(item);
+      }
+
+    } else {
+
+      item.itemQty = 1;
+      this.cartItems.push(item);
+    }
+
+    this.adminService.setCartItems(this.cartItems);
+    this.itemList = JSON.parse(this.adminService.getCartsItems());
+
+    console.log('items list', this.itemList);
+
+
     if (this.biilAmount >= item.price) {
       this.biilAmount -= item.price;
       this.totalBillAmout -= item.price;
 
     }
-    // if (Math.sign(this.biilAmount) === 1 && this.biilAmount > 0) {
-    //   this.biilAmount -= item.price;
-    // }
 
   }
 

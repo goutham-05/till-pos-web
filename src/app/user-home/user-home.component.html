@@ -55,7 +55,7 @@
                   <td class="text-center"> {{item.price}} </td>
 
                   <td class="text-center">
-                    <button type="button" class="btn btn-danger" (click)="removeItem(item)">Remove</button>
+                    <button type="button" class="btn btn-danger" (click)="removeItem(item, i)">Remove</button>
                     <!-- <span class="px-3"> {{count}} </span> -->
                     <span class="px-2"></span>
                     <button type="button" class="btn btn-success" (click)="addItem(item, i)">Add</button>
@@ -70,11 +70,11 @@
           <div class="col-4">
                   <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Cart summary </div>
                   <div class="p-4">
-<!--
-                      <ul class="list-unstyled mb-4" *ngFor="let item of itemList; let i = index">
-                          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">{{item.name}} x 0</strong><strong>$ {{itemQty}} Total</strong></li>
 
-                      </ul> -->
+                      <ul class="list-unstyled mb-4" *ngFor="let item of itemList; let i = index">
+                          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">{{item.name}} x {{item.itemQty}}</strong><strong>$ {{item.itemQty * item.price}} Total</strong></li>
+
+                      </ul>
 
                       <ul class="list-unstyled mb-4">
                           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
